@@ -1,6 +1,8 @@
 from aws_cdk import core, aws_codepipeline as codepipeline, aws_codepipeline_actions as cpactions
 from aws_cdk import pipelines
 
+from .serverless_stage import ServerlessStage
+
 APP_ACCOUNT = "##CHANGE##"
 
 
@@ -31,3 +33,10 @@ class PipelineStack(core.Stack):
                                          pipeline_name="ServerlessPipeline",
                                          source_action=source_action,
                                          synth_action=synth_action)
+
+        stage = ServerlessStage(self, 'TestDeploy', env={
+            "account": "555618984259",
+            "region": "us-east-1"
+        })
+
+        pipeline.add_application_stage(stage)

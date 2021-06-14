@@ -1,5 +1,5 @@
 from aws_cdk import core
-from serverless_function import LambdaStack
+from .serverless_function import LambdaStack
 
 
 class ServerlessStage(core.Stage):
