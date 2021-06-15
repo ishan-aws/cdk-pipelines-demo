@@ -44,6 +44,5 @@ class PipelineStack(core.Stack):
             "region": "us-east-1"
         })
 
-        stage.add_action(cpactions.ManualApprovalAction(action_name="Manually Approve"))
-
-        pipeline.add_application_stage(stage)
+        proc_stage = pipeline.add_application_stage(stage)
+        proc_stage.add_manual_approval_action()
