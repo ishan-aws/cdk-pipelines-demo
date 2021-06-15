@@ -6,6 +6,11 @@ from .serverless_stage import ServerlessStage
 APP_ACCOUNT = "##CHANGE##"
 
 
+# Source
+# Stages
+# Mutate Pipeline
+# .
+
 class PipelineStack(core.Stack):
     def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
@@ -38,5 +43,7 @@ class PipelineStack(core.Stack):
             "account": "555618984259",
             "region": "us-east-1"
         })
+
+        stage.add_action(cpactions.ManualApprovalAction(action_name="Manually Approve"))
 
         pipeline.add_application_stage(stage)
