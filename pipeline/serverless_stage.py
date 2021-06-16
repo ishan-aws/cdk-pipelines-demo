@@ -1,8 +1,14 @@
 from aws_cdk import core, aws_apigateway as apig
-from .serverless_function import LambdaStackWithApi
+from .serverless_function import LambdaApiDev, LambdaApiProd
 
 
-class ServerlessStage(core.Stage):
+class ApplicationDevStage(core.Stage):
     def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
-        self.service = LambdaStackWithApi(self, 'DevServerlessFunction')
+        self.service = LambdaApiDev(self, 'ApplicationDevStage')
+
+
+class ApplicationProdStage(core.Stage):
+    def __init__(self, scope: core.Construct, id: str, **kwargs):
+        super().__init__(scope, id, **kwargs)
+        self.service = LambdaApiProd(self, 'ApplicationProdStage')

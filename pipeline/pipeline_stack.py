@@ -1,15 +1,13 @@
 from aws_cdk import core, aws_codepipeline as codepipeline, aws_codepipeline_actions as cpactions
 from aws_cdk import pipelines
 
-from .serverless_stage import ServerlessStage
+from .serverless_stage import ApplicationDevStage, ApplicationProdStage
 
-APP_ACCOUNT = "##CHANGE##"
+deployment_env = {
+    "account": "555618984259",
+    "region": "us-east-1"
+}
 
-
-# Source
-# Stages
-# Mutate Pipeline
-# .
 
 class PipelineStack(core.Stack):
     def __init__(self, scope: core.Construct, id: str, **kwargs):
@@ -43,31 +41,9 @@ class PipelineStack(core.Stack):
                                          source_action=source_action,
                                          synth_action=synth_action)
 
-        app_stage = ServerlessStage(self, 'DeploymentStage', env={
-            "account": "555618984259",
-            "region": "us-east-1"
-        })
+        dev_stage = ApplicationDevStage(self, 'ApplicationDevStage', env=deployment_env)
+        pipeline_dev_stage = pipeline.add_application_stage(dev_stage)
+        pipeline_dev_stage.add_manual_approval_action()
 
-        whole_app_stage = pipeline.add_application_stage(app_stage)
-        # dev_stage = app_stage.service.get_dev_api_stage()
-        # dev_stage_pipeline = pipeline.add_application_stage(dev_stage)
-        #
-        # prod_stage = app_stage.service.get_prod_api_stage()
-        # prod_stage_pipeline = pipeline.add_application_stage(prod_stage)
-        # prod_stage_pipeline.add_manual_approval_action()
-
-        # # Stages of the pipeline
-        # dev_env = ServerlessStage(self, 'DevStage', flavour="dev", env={
-        #     "account": "555618984259",
-        #     "region": "us-east-1"
-        # })
-        # dev_stage = pipeline.add_application_stage(dev_env)
-        #
-        # # Production stage
-        # prod_env = ServerlessStage(self, 'ProdStage', flavour="prod",
-        #                            env={
-        #                                "account": "555618984259",
-        #                                "region": "us-east-1"
-        #                            })
-        # prod_stage = pipeline.add_application_stage(prod_env)
-        # prod_stage.add_manual_approval_action()
+        prod_stage = ApplicationProdStage(self, 'ApplicationProdStage', env=deployment_env)
+        pipeline.add_application_stage(prod_stage)
