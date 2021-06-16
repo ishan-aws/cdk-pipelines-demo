@@ -18,6 +18,7 @@ class PipelineStack(core.Stack):
         source_artifact = codepipeline.Artifact()
         cloud_assembly_artifact = codepipeline.Artifact()
 
+        # Source
         source_action = cpactions.GitHubSourceAction(
             action_name="Github",
             output=source_artifact,
@@ -26,6 +27,8 @@ class PipelineStack(core.Stack):
             repo="cdk-pipelines-demo",
             trigger=cpactions.GitHubTrigger.POLL
         )
+
+        # Synthesise
         synth_action = pipelines.SimpleSynthAction(
             source_artifact=source_artifact,
             cloud_assembly_artifact=cloud_assembly_artifact,
@@ -33,16 +36,25 @@ class PipelineStack(core.Stack):
             synth_command="cdk synth"
         )
 
+        # Create the pipeline
         pipeline = pipelines.CdkPipeline(self, "Pipeline",
                                          cloud_assembly_artifact=cloud_assembly_artifact,
                                          pipeline_name="ServerlessPipeline",
                                          source_action=source_action,
                                          synth_action=synth_action)
 
-        stage = ServerlessStage(self, 'TestDeploy', env={
+        # Stages of the pipeline
+        dev_env = ServerlessStage(self, 'DevStage', flavour="dev", env={
             "account": "555618984259",
             "region": "us-east-1"
         })
+        dev_stage = pipeline.add_application_stage(dev_env)
 
-        proc_stage = pipeline.add_application_stage(stage)
-        proc_stage.add_manual_approval_action()
+        # Production stage
+        prod_env = ServerlessStage(self, 'ProdStage', flavour="prod",
+                                   env={
+                                       "account": "555618984259",
+                                       "region": "us-east-1"
+                                   })
+        prod_stage = pipeline.add_application_stage(prod_env)
+        prod_stage.add_manual_approval_action()
