@@ -22,6 +22,9 @@ class LambdaApiDev(core.Stack):
 
 
 class LambdaApiProd(core.Stack):
+    """
+    A more powerful lambda configuration, with 1GB Memory.
+    """
     def __init__(self, app: core.App, id: str, **kwargs):
         super().__init__(app, id, **kwargs)
 
