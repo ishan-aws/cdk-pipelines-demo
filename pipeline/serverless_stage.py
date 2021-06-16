@@ -3,6 +3,6 @@ from .serverless_function import LambdaStackWithApi
 
 
 class ServerlessStage(core.Stage):
-    def __init__(self, scope: core.Construct, id: str, flavour: str, **kwargs):
+    def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
-        service = LambdaStackWithApi(self, 'DevServerlessFunction'+flavour, stage=flavour)
+        self.service = LambdaStackWithApi(self, 'DevServerlessFunction')
