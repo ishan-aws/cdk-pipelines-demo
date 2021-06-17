@@ -1,0 +1,44 @@
+# RelativeURLs=true
+# CanonifyURLs=true
+languageCode = "en-US"
+defaultContentLanguage = "en"
+
+title = "AWS Cognito Userpools and OAuth2 workshop"
+theme = "learn"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+
+
+
+# uglyurls = true
+# sectionPagesMenu = "main"
+# pygmentsCodeFences = true
+# pygmentsStyle = "monokai"
+
+[params]
+  ordersectionsby = "weight"
+  editURL = ""
+  description = "AWS Cognito Userpools and OAuth2 workshop"
+  author = "Paul Kukiel"
+  disableBreadcrumb = false
+  disableNextPrev = false
+  themeVariant = "workshops"
+  disableSearch = true
+  disableAssetsBusting = true
+  disableLanguageSwitchingButton = true
+  disableShortcutsTitle = true
+  disableInlineCopyToClipBoard = true
+  showVisitedLinks = true
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+
+[Languages]
+[Languages.en]
+title = "AWS Cognito Userpools and OAuth2 workshop"
+weight = 1
+languageName = "English"
