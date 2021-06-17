@@ -5,7 +5,7 @@ weight = 30
 
 There are two key files in the codebase that are provided.
 
-### Defining the stack
+### Stack Definition
 In the file `pipeline/serverless_function.py` you can find the stack defined. 
 
 ```python
@@ -37,7 +37,7 @@ The above code defines a Lambda function running in the Python 3.7 enviornment w
 
 An API is created using APIGateway that allows the created Lambda function to handle the request.
 
-### Deploying the stack
+### Stack Deployment
 The `app.py` is where the two different environment stacks are created. 
 
 ```python
@@ -52,3 +52,13 @@ LambdaApiProd(app, 'LambdaApiProd')
 
 app.synth()
 ```
+
+`LambdaApiProd` class definition can also be found in `pipeline/serverless_function`
+
+Running `cdk deploy` inside the directory would deploy two different stacks. 
+
+### Who, How?
+
+Q: Who runs the `cdk deploy` command?
+
+A: An automated code pipeline will run it whenever new code is pushed to Git. 

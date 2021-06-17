@@ -6,6 +6,7 @@ pre = "<b>2. </b>"
 +++
 
 * Setup a Cloud9 Environment
-* Getting the starter code
-* Creating the repository
-* Installing the CDK
+* Get the starter code
+* Understand the starter code
+* Creating the Codecommit repository
+
