@@ -1,5 +1,5 @@
 from aws_cdk import core, aws_apigateway as apig
-from .serverless_function import LambdaApiDev, LambdaApiProd
+from .demo_api import LambdaApiDev, LambdaApiProd
 
 
 class ApplicationDevStage(core.Stage):

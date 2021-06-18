@@ -1,6 +1,6 @@
-from aws_cdk import core, aws_codedeploy as codedeploy, aws_lambda as _lambda, aws_apigateway as apig
-
 from os import path
+
+from aws_cdk import core, aws_lambda as _lambda, aws_apigateway as apig
 
 this_dir = path.dirname(__file__)
 
@@ -20,6 +20,9 @@ class LambdaApiDev(core.Stack):
                                           stage_name="v1"
                                       ))
 
+        core.CfnOutput(self, "DevFuncArn", value=self.func.function_name)
+        core.CfnOutput(self, "DevApiEndpoint", value=self.api.url)
+
 
 class LambdaApiProd(core.Stack):
     """
@@ -37,3 +40,6 @@ class LambdaApiProd(core.Stack):
         self.api = apig.LambdaRestApi(self, "SampleApi-Prod", handler=self.func, deploy_options=apig.StageOptions(
             stage_name="v1"
         ))
+
+        core.CfnOutput(self, "ProdFuncArn", value=self.func.function_name)
+        core.CfnOutput(self, "ProdApiEndpoint", value=self.api.url)

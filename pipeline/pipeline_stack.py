@@ -2,12 +2,8 @@ from aws_cdk import core, aws_codepipeline as codepipeline, aws_codepipeline_act
 from aws_cdk import pipelines
 from aws_cdk import aws_codecommit as codecommit
 
-from .serverless_stage import ApplicationDevStage, ApplicationProdStage
-
-deployment_env = {
-    "account": "555618984259",
-    "region": "us-east-1"
-}
+from serverless_stage import ApplicationDevStage, ApplicationProdStage
+from cdk_config.deployment_env import aws_account_info
 
 
 class PipelineStack(core.Stack):
@@ -52,9 +48,9 @@ class PipelineStack(core.Stack):
                                          source_action=source_action,
                                          synth_action=synth_action)
 
-        dev_stage = ApplicationDevStage(self, 'ApplicationDevStage', env=deployment_env)
+        dev_stage = ApplicationDevStage(self, 'ApplicationDevStage', env=aws_account_info)
         pipeline_dev_stage = pipeline.add_application_stage(dev_stage)
         pipeline_dev_stage.add_manual_approval_action()
 
-        prod_stage = ApplicationProdStage(self, 'ApplicationProdStage', env=deployment_env)
+        prod_stage = ApplicationProdStage(self, 'ApplicationProdStage', env=aws_account_info)
         pipeline.add_application_stage(prod_stage)
