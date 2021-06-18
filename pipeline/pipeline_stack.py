@@ -20,16 +20,17 @@ class PipelineStack(core.Stack):
         source_action = cpactions.CodeCommitSourceAction(
             action_name="CodeCommit",
             output=source_artifact,
-            repository="",
+            repository="arn:aws:codecommit:us-east-1:555618984259:cdktest",
+            branch="withdocs"
         )
-        source_action = cpactions.GitHubSourceAction(
-            action_name="Github",
-            output=source_artifact,
-            oauth_token=core.SecretValue.secrets_manager("cdk/githubtoken"),
-            owner="ishan-aws",
-            repo="cdk-pipelines-demo",
-            trigger=cpactions.GitHubTrigger.POLL
-        )
+        # source_action = cpactions.GitHubSourceAction(
+        #     action_name="Github",
+        #     output=source_artifact,
+        #     oauth_token=core.SecretValue.secrets_manager("cdk/githubtoken"),
+        #     owner="ishan-aws",
+        #     repo="cdk-pipelines-demo",
+        #     trigger=cpactions.GitHubTrigger.POLL
+        # )
 
         # Synthesise
         synth_action = pipelines.SimpleSynthAction(
