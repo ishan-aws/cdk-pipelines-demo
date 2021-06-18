@@ -17,13 +17,21 @@ class PipelineStack(core.Stack):
         cloud_assembly_artifact = codepipeline.Artifact()
 
         # Source
-        source_action = cpactions.GitHubSourceAction(
-            action_name="Github",
+        # source_action = cpactions.GitHubSourceAction(
+        #     action_name="Github",
+        #     output=source_artifact,
+        #     oauth_token=core.SecretValue.secrets_manager("cdk/githubtoken"),
+        #     owner="ishan-aws",
+        #     repo="cdk-pipelines-demo",
+        #     trigger=cpactions.GitHubTrigger.POLL
+        # )
+
+        # Source
+        source_action = cpactions.CodeCommitSourceAction(
+            action_name="CodeCommit",
             output=source_artifact,
-            oauth_token=core.SecretValue.secrets_manager("cdk/githubtoken"),
-            owner="ishan-aws",
-            repo="cdk-pipelines-demo",
-            trigger=cpactions.GitHubTrigger.POLL
+            repository="arn:aws:codecommit:us-east-1:555618984259:cdktest",
+            branch="withdocs"
         )
 
         # Synthesise
