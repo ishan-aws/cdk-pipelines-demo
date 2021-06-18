@@ -1,6 +1,6 @@
 +++
-title = "Push your code"
-weight = 20
+title = "Deploy the pipeline"
+weight = 30
 +++
 
 Only once, you'll need to run deploy from the terminal. 
@@ -14,4 +14,4 @@ cdk synth # check if it works
 cdk deploy
 ```
 
-You will not have to run this again. 
+You will not have to run this again, as the pipeline has now started.

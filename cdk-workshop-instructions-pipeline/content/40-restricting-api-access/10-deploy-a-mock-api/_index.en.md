@@ -1,5 +1,5 @@
 +++
-title = "Deploy our pipeline stack"
+title = "Configuring Pipeline Deployment"
 weight = 10
 +++
 
