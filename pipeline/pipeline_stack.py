@@ -12,7 +12,7 @@ class PipelineStack(core.Stack):
         cloud_assembly_artifact = codepipeline.Artifact()
 
         # Source
-        repo = codecommit.Repository(self, "CodeRepo", repository_name="cdkworkshop")
+        repo = codecommit.Repository.from_repository_name(self, "CodeRepo", repository_name="cdkworkshop")
         source_action = cpactions.CodeCommitSourceAction(
             action_name="CodeCommit",
             output=source_artifact,
