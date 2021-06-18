@@ -1,3 +1,5 @@
+# Completed Lab
+
 # CDK Pipelines Workshop
 The goal here is to create stacks using `AWS CodePipeline`.
 
