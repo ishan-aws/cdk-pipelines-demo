@@ -1,5 +1,5 @@
 from aws_cdk import core, aws_apigateway as apig
-from .demo_api import LambdaApiDev, LambdaApiProd
+from pipeline.demo_api import LambdaApiDev, LambdaApiProd
 
 
 class ApplicationDevStage(core.Stage):
