@@ -3,8 +3,9 @@ from subprocess import call
 
 cc = boto3.client('codecommit')
 
-response = cc.get_repository(
-    repositoryName='cdkworkshop'
+response = cc.create_repository(
+    repositoryName='cdkworkshop',
+    repositoryDescription='CDK Workshop Git Repo'
 )
 
 http_clone_url = response.get("repositoryMetadata").get("cloneUrlHttp")
