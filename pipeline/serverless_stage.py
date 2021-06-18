@@ -1,4 +1,5 @@
-from aws_cdk import core, aws_apigateway as apig
+from aws_cdk import core
+
 from .serverless_function import LambdaApiDev, LambdaApiProd
 
 

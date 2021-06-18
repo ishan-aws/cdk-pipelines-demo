@@ -18,6 +18,9 @@ pl = PipelineStack(app, 'PipelineStack', env={
     "account": "555618984259",
     "region": "us-east-1"
 })
-core.Tags.of(pl).add("Project", "cdkdemo")
 
 app.synth()
+
+core.Tags.of(pl).add("Project", "cdkdemo")
+
+

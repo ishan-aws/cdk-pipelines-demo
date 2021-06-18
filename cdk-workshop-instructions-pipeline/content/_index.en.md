@@ -15,5 +15,5 @@ The API is deployed into two different environments; development and production.
 To simulate a real world scenario, the workshop also shows how to add manual approval process before resources in production are deployed.
 
 
-![](/fixed-arch-diagram.png)
+![](/fixed2-arch.png)
 
