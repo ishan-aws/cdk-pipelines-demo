@@ -27,7 +27,7 @@ class PipelineStack(core.Stack):
         #     trigger=cpactions.GitHubTrigger.POLL
         # )
 
-        repo = codecommit.Repository(self, "CodeRepo", repository_name="cdkcode")
+        repo = codecommit.Repository(self, "CodeRepo", repository_name="cdktest")
 
         # Source
         source_action = cpactions.CodeCommitSourceAction(
