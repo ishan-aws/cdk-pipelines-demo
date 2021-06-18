@@ -1,5 +1,6 @@
 from aws_cdk import core, aws_codepipeline as codepipeline, aws_codepipeline_actions as cpactions
 from aws_cdk import pipelines
+from aws_cdk import aws_codecommit as codecommit
 
 from .serverless_stage import ApplicationDevStage, ApplicationProdStage
 
@@ -17,12 +18,17 @@ class PipelineStack(core.Stack):
         cloud_assembly_artifact = codepipeline.Artifact()
 
         # Source
+
+        repo = codecommit.Repository(self, "CodeRepo", repository_name="cdktest")
+
+        # Source
         source_action = cpactions.CodeCommitSourceAction(
             action_name="CodeCommit",
             output=source_artifact,
-            repository="arn:aws:codecommit:us-east-1:555618984259:cdktest",
+            repository=repo,
             branch="withdocs"
         )
+
         # source_action = cpactions.GitHubSourceAction(
         #     action_name="Github",
         #     output=source_artifact,
