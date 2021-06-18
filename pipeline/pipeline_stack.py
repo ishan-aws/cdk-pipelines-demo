@@ -2,7 +2,7 @@ from aws_cdk import core, aws_codepipeline as codepipeline, aws_codepipeline_act
 from aws_cdk import pipelines
 from aws_cdk import aws_codecommit as codecommit
 
-from cdk_config.deployment_env import aws_account_info
+from .pipeline_stages import ApplicationDevStage, ApplicationProdStage
 
 
 class PipelineStack(core.Stack):
@@ -34,3 +34,6 @@ class PipelineStack(core.Stack):
                                          pipeline_name="ServerlessPipeline",
                                          source_action=source_action,
                                          synth_action=synth_action)
+
+        pipeline.add_application_stage(ApplicationDevStage(self, 'ApplicationDevStage'))
+        pipeline.add_application_stage(ApplicationProdStage(self, 'ApplicationProdStage'), manual_approvals=True)
