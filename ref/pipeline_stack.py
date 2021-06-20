@@ -47,9 +47,9 @@ class PipelineStack(core.Stack):
                                          source_action=source_action,
                                          synth_action=synth_action)
 
-        dev_stage = ApplicationDevStage(self, 'ApplicationDevStage', env=aws_account_info)
+        dev_stage = ApplicationDevStage(self, 'ApplicationDevStage')
         pipeline_dev_stage = pipeline.add_application_stage(dev_stage)
         pipeline_dev_stage.add_manual_approval_action()
 
-        prod_stage = ApplicationProdStage(self, 'ApplicationProdStage', env=aws_account_info)
+        prod_stage = ApplicationProdStage(self, 'ApplicationProdStage')
         pipeline.add_application_stage(prod_stage)
